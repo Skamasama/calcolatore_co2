@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo - Full page vertical content slider</title>
+	<!-- Google Font API -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet">
+	<!-- Common stylesheet -->
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<!-- Custom styles -->
+	<link rel="stylesheet" type="text/css" href="css/style_calc.css">
+	<!-- Viewport meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+</head>
+<body>
+	<div class="dd-wrapper">
+		<!-- Sidebar -->
+		<div class="sidebar">
+			<div class="sidebar-content">
+				<div class="sidebar-list">
+					<ul class="sidebar-list-menu">
+						<span class="sidebar-list-menu-active-bar"></span>
+						<li><a href="#content_1" class="active" dd-active-tab="1" dd-sidebar-tab="#9dbc1d">Home</a></li>
+						<li><a href="#content_2"  dd-active-tab="2" dd-sidebar-tab="#d9a7eb">Alloggio</a></li>
+						<li><a href="#content_3" dd-active-tab="3" dd-sidebar-tab="#b5a7eb">Trasporti</a></li>
+						<li><a href="#content_4" dd-active-tab="4" dd-sidebar-tab="#a7d5eb">Cibi</a></li>
+						<li><a href="#content_5" dd-active-tab="5" dd-sidebar-tab="#a7ebe4">Extra</a></li>
+						<li><a href="#content_6" dd-active-tab="6" dd-sidebar-tab="#a9eba7">Compensazione</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Content part -->
+		<div class="content">
+			<div id="content_1" class="content-container">
+				<div class="content--center">
+					<img src="images\sfondo.png" style="height:100%; width:100%; object-fit: cover;">
+					<h1 class="home-title">Calcolo dell'impronta ecologica di un viaggio d'istruzione</h1>
+					<h2 class="home-subtitle"> <a class="home-button" href="home.html">Torna alla pagina informativa</a></h2>
+				</div>
+			</div>
+<!-- ALLOGGI-->
+			<div id="content_2" class="content-container">
+				<div class="subtitle-composition">
+					<h2 class="title-lite">Alloggi</h2>
+					<img class="loghino" src="images\transparent\alloggio.png">
+				</div>
+				<hr>
+				<div class="tabella">
+					<table id="alloggi">
+						<thead>
+							<tr>
+								<th>N. Persone</th>
+								<th>N. Notti</th>
+								<th>Tipologia</th>
+								<th>Emissione (CO<sub>2</sub> eq.)</th>
+							   
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input name="numero_persone_alloggi" type="number" min="1" max="999" value="1" onchange="calculateTotal_alloggi();"></td>
+								<td><input name="numero_alloggi" type="number" min="1" max="999" value="1" onchange="calculateTotal_alloggi();"></td>
+								<td>
+									<select name="sel_alloggi" onchange="calculateTotal_alloggi()">
+										<option value="A">Hotel </option><option value="B">Ostello</option><option value="C">Campeggio</option><option value="D">Tenda (dotata di fornello a butano)</option>
+									</select>
+								</td>
+								<td>0</td>
+								<td>
+								<button name="btn_alloggi" type="button" onclick="removeRow2(this);calculateTotal_alloggi()">Remove</button>
+							</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<button name="aggiungi_alloggi" onclick="addRow_alloggi();calculateTotal_alloggi()">+</button>
+					<button name="rimuovi_alloggi"  onclick="removeRow('alloggi');calculateTotal_alloggi()">-</button>
+					<br><br>
+					<label>Total:</label>
+					<input  type="text" id="total_alloggi" value="0" readonly>
+					<button onclick="calculateTotal_alloggi()">Calculate</button>
+				</div>
+			</div>
+			
+<!-- TRASPORTI-->
+			
+			<div id="content_3" class="content-container">
+			<div class="subtitle-composition">
+				<h2 class="title-lite">Trasporti</h2>
+				<img class="loghino" src="images\transparent\trasporti.png">
+			</div>
+			<hr>
+			<div class="tabella">
+				<table id="trasporti">
+					<thead>
+						<tr>
+							<th>N. Passeggeri</th>
+							<th>Distanza [km]</th>
+							<th>Mezzo di trasporto</th>
+							<th>Price</th>
+							 <th>Andata/Ritorno</th>
+							  
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							  <td><input name="numero_persone_trasporti" type="number" min="1" max="999" value="1" onchange="calculateTotal_trasporti();"></td>
+							<td><input name="numero_trasporti" type="number" min="1" max="999" value="1" onchange="calculateTotal_trasporti();"></td>
+							<td>
+								<select name="sel_trasporti" onchange="calculateTotal_trasporti()">
+									<option value="D" >Macchina</option>
+									<option value="E">Moto</option>
+									<option value="F">Bus</option>
+									<option value="G">Nave</option>
+									<option value="H">Treno/Metro/Tram</option>
+								</select>
+							</td>
+							<td>0</td>
+							<td><input type="checkbox" id="and_rit" checked="checked" onchange="calculateTotal_trasporti()"></td>
+							
+							<td>
+							<button name="btn_trasporti" type="button" onclick="removeRow2(this);calculateTotal_trasporti()">Remove</button>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<button name="aggiungi_trasporti" onclick="addRow_trasporti();calculateTotal_trasporti()">+</button>
+				<button name="rimuovi_trasporti"  onclick="removeRow('trasporti');calculateTotal_trasporti()">-</button>
+				<br><br>
+				<label>Total:</label>
+				<input  type="text" id="total_trasporti" value="0" readonly>
+				<button onclick="calculateTotal_trasporti()">Calculate</button>
+				</div>
+			</div>
+<!-- CIBO-->
+			<div id="content_4" class="content-container">
+			<div class="subtitle-composition">
+				<h2 class="title-lite">Cibi</h2>
+				<img class="loghino" src="images\transparent\cibo.png">
+			</div>
+			<hr>
+			<div class="tabella">
+				<table id="cibi">
+					<thead>
+						<tr>
+							<th>Quantity</th>
+							<th>Product</th>
+							<th>Price</th>
+						   
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							
+							<td><input name="numero_cibi" type="number" min="1" max="999" value="1" onchange="calculateTotal_cibi();"></td>
+							<td>
+								<select name="sel_cibi" onchange="calculateTotal_cibi()">
+									
+									<optgroup label="colazione">
+									<option value="E" >cereali</option>
+									<option value="F">frutta secca</option>
+									<option value="G">Burro</option>
+                                                                        <option value="H">bustina zucchero</option>
+									<option value="I">porzione marmellata</option>
+									<option value="J">1 uovo</option>
+									<option value="K">200ml latte</option>
+									<option value="L">tazzina di caffe</option>
+                                                                        <option value="M">bicchiere di acqua</option>
+                                                                        <option value="N">bottiglia da mezzo litro di acqua</option>
+                                                                        <option value="O">bottiglia da 1 litro di acqua</option>
+                                                                        <option value="P">succo 200ml</option>
+									</optgroup>
+									<optgroup label="pranzo">
+									<option value="PE">1 porzione di pasta</option>
+									<option value="PF">1 porzione ravioli o simili</option>
+									<option value="PG">1 porzione di riso</option>
+                                                                        <option value="PH">1 porzione di carne di manzo</option>
+									<option value="PI">1 porzione di carne di pollo</option>
+									<option value="PJ">1 porzione di carne di maiale</option>
+									<option value="PK">1 porzione di pesce</option>
+									<option value="PL">1 uovo</option>
+                                                                        <option value="PM">1 pizza</option>
+                                                                        <option value="PN">1 porzione di formaggio (50g)</option>
+                                                                        <option value="PO">1 porzione di legumi</option>
+                                                                        <option value="PP">bicchiere di acqua</option>
+                                                                        <option value="PQ">bottiglia da mezzo litro di acqua</option>
+                                                                        <option value="PR">bottiglia da 1 litro di acqua</option>
+                                                                        <option value="PS">bottiglia di birra (33cl)</option>
+                                                                        <option value="PT">bottiglia di birra (mezzo litro)</option>
+                                                                        <option value="PU">mezzo litro di vino</option>
+                                                                        <option value="PV">calice di vino</option>
+                                                                        <option value="PW">bibita in lattina</option>
+									<option value="PX">tazzina di caffe</option>
+									</optgroup>
+									<optgroup label="cena">
+									<option value="CE">1 porzione di pasta</option>
+									<option value="CF">1 porzione ravioli o simili</option>
+									<option value="CG">1 porzione di riso</option>
+                                                                        <option value="CH">1 porzione di carne di manzo</option>
+									<option value="CI">1 porzione di carne di pollo</option>
+									<option value="CJ">1 porzione di carne di maiale</option>
+									<option value="CK">1 porzione di pesce</option>
+									<option value="CL">1 uovo</option>
+                                                                        <option value="CM">1 pizza</option>
+                                                                        <option value="CN">1 porzione di formaggio (50g)</option>
+                                                                        <option value="CO">1 porzione di legumi</option>
+                                                                        <option value="CP">bicchiere di acqua</option>
+                                                                        <option value="CQ">bottiglia da mezzo litro di acqua</option>
+                                                                        <option value="CR">bottiglia da 1 litro di acqua</option>
+                                                                        <option value="CS">bottiglia di birra (33cl)</option>
+                                                                        <option value="CT">bottiglia di birra (mezzo litro)</option>
+                                                                        <option value="CU">mezzo litro di vino</option>
+                                                                        <option value="CV">calice di vino</option>
+                                                                        <option value="CW">bibita in lattina</option>
+									<option value="CX">tazzina di caffe</option>
+									</optgroup>
+								</select>
+							</td>
+							<td>0</td>
+							<td>
+							<button name="btn_cibi" type="button" onclick="removeRow2(this);calculateTotal_cibi()">Remove</button>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<button name="aggiungi_cibi" onclick="addRow_cibi();calculateTotal_cibi()">+</button>
+				<button name="rimuovi_cibi"  onclick="removeRow('cibi');calculateTotal_cibi()">-</button>
+				<br><br>
+				<label>Total:</label>
+				<input  type="text" id="total_cibi" value="0" readonly>
+				<button onclick="calculateTotal_cibi()">Calculate</button>
+				</div>
+			</div>
+			
+<!-- EXTRA-->
+			<div id="content_5" class="content-container">
+			<div class="subtitle-composition">
+				<h2 class="title-lite">Extra</h2>
+				<img class="loghino" src="images\transparent\extra.png">
+			</div>
+			<hr>
+			<div class="tabella">
+				<table id="extra">
+					<thead>
+						<tr>
+							<th>Quantità</th>
+							<th>Tipologia</th>
+							<th>Emissione (CO<sub>2</sub> eq.)</th>
+						   
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							
+							<td><input name="numero_extra" type="number" min="1" max="999" value="1" onchange="calculateTotal_extra();"></td>
+							<td>
+								<select name="sel_extra" onchange="calculateTotal_extra()"><optgroup label="Rifiuti"><option value="H">Sacchetto di plastica</option><option value="I">Sacchetto di carta</option><option value="J">Bottiglietta di plastica</option><option value="K">Lattina</option><option value="HH">Involucro di plastica (per alimenti)</option><option value="II">Involucro di carta stagnola</option><option value="IJ">Tovagliolo di carta</option></optgroup><optgroup label="Extra (souvenir)"><option value="L">Calamita di metallo</option><option value="M">Calamita di plastica</option><option value="N">Calamita di ceramica</option><option value="LL">Portachiavi di plastica</option><option value="LM">Portachiavi di metallo</option><option value="MM">Penna di plastica</option><option value="LI">Penna di metallo</option></optgroup><optgroup label="Extra (vestiti comprati)"><option value="O">Maglietta di cotone</option><option value="P">Maglietta in fibre sintetiche</option><option value="Q">Jeans (un paio)</option><option value="R">Sciarpa di lana</option><option value="S">Sciarpa di cotone</option><option value="T">Scarpe (un paio)</option><option value="ZA">Cappellino di cotone</option><option value="ZB">Cappellino in poliestere</option></optgroup><optgroup label="Extra (attività svolte)"><option value="U">Youtube (10 min)</option><option value="V">Servizi on demand (30 min)</option><option value="W">Musica in streaming (30 min)</option></optgroup></select>
+							</td>
+							<td>0</td>
+							<td>
+							<button name="btn_extra" type="button" onclick="removeRow2(this);calculateTotal_extra()">Remove</button>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<button name="aggiungi_extra" onclick="addRow_extra();calculateTotal_extra()">+</button>
+				<button name="rimuovi_extra"  onclick="removeRow('extra');calculateTotal_extra()">-</button>
+				<br><br>
+				<label>Total:</label>
+				<input  type="text" id="total_extra" value="0" readonly>
+				<button onclick="calculateTotal_extra()">Calculate</button>
+				</div>
+			</div>
+			
+<!-- COMPENSAZIONE-->
+		<div id="content_6" class="content-container">
+			<div class="subtitle-composition">
+				<h2 class="title-lite">Compensazione</h2>
+				<img class="loghino" src="images\transparent\compensazione.png">
+			</div>
+			<hr>
+			<!-- è scritto tutto nel file javascript-->
+			<p id="totale_emissioni"> 0 </p>
+			<p> Questi e altri alberi possono essere adottati su <a href="https://www.treedom.net/it/plant-a-tree">Treedom<a>. Essi verranno piantati e curati e serviranno sia come metodo di compensazione della CO<sub>2</sub>, sia come impatto sociale positivo sulla popolazione locale.
+            
+		</div>
+	</div>
+	<!-- jQuery CDN -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Custom JS -->
+	<script src="js/script_calc.js"></script>
+</body>
+</html>
